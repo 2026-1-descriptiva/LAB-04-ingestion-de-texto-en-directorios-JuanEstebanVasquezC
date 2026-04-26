@@ -81,8 +81,8 @@ def pregunta_01():
 
     
 
-    input_folder = 'files\\input'
-    output_folder = 'files\\output'
+    input_folder = 'files/input'
+    output_folder = 'files/output'
     # create_output_folder(output_folder)
     
     for partition in os.listdir(input_folder):
@@ -98,7 +98,7 @@ def pregunta_01():
                             'target':sentiment}
                     raw_data.append(row)
         df_partition = pd.DataFrame(raw_data)
-        df_partition.to_csv(output_folder + '\\'+ partition+ '_dataset.csv')
+        df_partition.to_csv(output_folder + '/'+ partition+ '_dataset.csv')
         print(df_partition)
 
 pregunta_01()
