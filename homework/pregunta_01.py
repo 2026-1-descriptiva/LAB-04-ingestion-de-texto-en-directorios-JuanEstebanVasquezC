@@ -4,7 +4,8 @@
 """
 Escriba el codigo que ejecute la accion solicitada en cada pregunta.
 """
-
+import os
+import pandas as pd
 
 def pregunta_01():
     """
@@ -71,3 +72,35 @@ def pregunta_01():
 
 
     """
+    # def create_output_folder(path):
+    #     if not os.path.exists(path):
+    #         os.makedirs(path)
+    #     else:
+    #         os.rmdir(path)
+    #         os.makedirs(path)
+
+    
+
+    input_folder = 'files\\input'
+    output_folder = 'files\\output'
+    # create_output_folder(output_folder)
+    
+    for partition in os.listdir(input_folder):
+        partition_path = os.path.join(input_folder,partition)
+        raw_data=[]
+        for sentiment in os.listdir(partition_path):
+            sentiment_path = os.path.join(partition_path,sentiment)
+            for record in os.listdir(sentiment_path):
+                record_path = os.path.join(sentiment_path,record)
+                with open(record_path) as f:
+                    phrase = f.read()
+                    row = {'phrase':phrase,
+                            'target':sentiment}
+                    raw_data.append(row)
+        df_partition = pd.DataFrame(raw_data)
+        df_partition.to_csv(output_folder + '\\'+ partition+ '_dataset.csv')
+        print(df_partition)
+
+pregunta_01()
+
+
